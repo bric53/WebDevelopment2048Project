@@ -1,0 +1,26 @@
+p { color:black; }
+
+table, tr, td {
+  border: 8px solid #654321;
+  width: 100px;
+  height: 100px;
+   
+   
+  
+}
+table {
+  border-collapse: collapse;
+    table-layout: fixed;
+}
+
+td{
+	height 25%;
+	text-align: center;
+	background-color: #E5CFc4;
+	font-size: 34px;
+	
+}
+tr {
+	width 25%;
+	
+}
