@@ -20,6 +20,45 @@ to see gamestate, click <a href = "GameGrid.html" target = "_blank">here</a>
 <P>
 <a href ="https://github.com/gabrielecirulli/2048/blob/master/LICENSE.txt" target = "_blank">permission to use image</a>
 
+<P>
+<h2>Software Design</h2>
+Model:
+<br><br>
+Constants:<br>
+ Win_val the size of the tile that will win the game if reached <br>
+ <br>
+ Tiles:<br>
+ each tile will have only a numeric value. They can be empty, or have an integer value.<br>
+ Empty tiles will be defined as 0, while all other tiles values will be the same as the number stored<br>
+ <br>
+ <h3>Game:</h3><br>
+ each game will have the following properties:<br>
+ Win, a bool that tracks whether the game has been won<br>
+ GameOver, a bool that tracks whether the game has been lost (note that win and Gameover can both be true if a game was won and then the player continued playing, then lost)<br>
+ turn, the number of turns that the player has made<br>
+ score, representing the score of the player<br>
+<br>
+Functions/Methods<br>
+Up()<br>
+Moves each of the tiles to the highest empty spot in line with them, and merges equal tiles. Also creates one random tile in an empty spot on the board. Increments turn and calculates new score<br>
+<br>
+Down ()<br>
+Moves each of the tiles to the Lowest empty spot in line with them, and merges equal tiles. Also creates one random tile in an empty spot on the board.  Increments turn and calculates new score<br>
+<br>
+Left()<br>
+Moves each of the tiles to the Leftmost empty spot in line with them, and merges equal tiles. Also creates one random tile in an empty spot on the board.  Increments turn and calculates new score<br>
+<br>
+Right()<br>
+Moves each of the tiles to the Rightmost empty spot in line with them, and merges equal tiles. Also creates one random tile in an empty spot on the board.  Increments turn and calculates new score<br>
+<br>
+isOver()<br>
+returns a bool with the value of GameOver<br>
+<br>
+isWin()<br>
+returns a bool with the value of Win<br>
+<br>
+getScore()<br>
+returns the score
 
 
 <HR>

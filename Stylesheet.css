@@ -1,18 +1,19 @@
 .blank1 {background: Gainsboro;}
 .blank2 {background: White;}
-.two {background: red;}
+.two {background: pink; outline: 3px solid black; }
 .four {background: orange;}
 
 
 p { color:black; }
 
 table, tr, td {
-  border: 4px solid black;
+  border: 1px solid white;
+  outline: 3px solid black;
   width: 100px;
   height: 100px;
 }
 table {
-  border-collapse: collapse;
+  border: 10px #101055;
     table-layout: fixed;
 }
 
@@ -21,7 +22,8 @@ td{
 	text-align: center;
 	vertical-align: middle;
 	background-color: #E5CFc4;
-	font-size: 34px;
+	font-size: 40px;
+	font: baloo;
 	
 }
 tr {
