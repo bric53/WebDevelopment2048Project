@@ -102,7 +102,7 @@ function update(main, height, width)
 	  var w = isWin();
 	  var t = document.getElementById("texthere");
 	  
-	  t.innerHTML = w?("good game! to give it another go, press \"restart\""):("Sorry, you Lost! \n \n I guess you just weren't good enough! \n\n to try again, press \"restart\"");
+	  t.innerHTML = w?("Good Game, You Won!!!"):("Sorry, you Lost! \n \n I guess you just weren't good enough! \n\n to try again, press \"restart\"");
 	  
 	  
   }
