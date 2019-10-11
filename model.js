@@ -15,7 +15,7 @@ function getTile(row,col)
 
 }
 
-function initialize(height,width)
+function initialize(height,width)//sets the game grid to all 0's
 {
 	
 	TableSize = [height,width];
