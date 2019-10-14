@@ -57,7 +57,7 @@ function keyPress(event) {
 
 function makeTable(main, height, width)
 {
-	
+	var TB = document.createElement("table");
 	var TD;
 	var TR;
 	for (i = 0; i < height; i++){
@@ -72,9 +72,10 @@ function makeTable(main, height, width)
 			TR.appendChild(TD);	//adds the tile to the row
 			
 		}
-		main.appendChild(TR); //adds a row to the table
+		TB.appendChild(TR); //adds a row to the table
 		
 	}
+	main.appendChild(TB);
 }
 
 function update(main, height, width)
@@ -86,11 +87,11 @@ function update(main, height, width)
 		for (j = 0; j < width; j++){
 			TileNum = getTile(i,j); 
 			if (TileNum == 0)
-			main.children[i].children[j].innerHTML = "";
+			main.children[0].children[i].children[j].innerHTML = "";
 		else
-			main.children[i].children[j].innerHTML = TileNum;
+			main.children[0].children[i].children[j].innerHTML = TileNum;
 			
-			main.children[i].children[j].className = returnClass(main.children[i].children[j]);
+			main.children[0].children[i].children[j].className = returnClass(main.children[0].children[i].children[j]);
 		}
 		
 		
