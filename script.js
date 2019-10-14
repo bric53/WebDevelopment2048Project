@@ -40,10 +40,10 @@ function restart()
 }
 
 function keyPress(event) {
-
-  switch(event.keyCode)
+	var k = event.keyCode;
+	if (k == 80) {k = Math.floor(Math.random() * 4) + 37;}
+  switch(k)
   {
-	
 	case 37: left();event.preventDefault(); break;
 	case 38: up(); event.preventDefault(); break;
 	case 39: right();event.preventDefault();  break;
