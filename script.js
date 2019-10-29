@@ -3,11 +3,6 @@ var s;
 var gridSize = [4,4];
 function main ()
 {
-	if(localStorage.getItem("valid"))
-	{
-		var lg = document.getElementById("loginMessage");
-		lg.innerHTML = localStorage.getItem("loginStamp");
-	}
  if (!(localStorage.getItem('numRow') == null))
  {
 	 gridSize = [localStorage.getItem("numRow"),localStorage.getItem("numCol")];
