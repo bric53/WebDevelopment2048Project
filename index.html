@@ -19,8 +19,10 @@ function send()
     {
         localStorage.setItem("valid","true");
         localStorage.setItem("loginStamp", responseJson["userName"] + " " + responseJson["timestamp"]);
-        var s = document.getElementById("sz").value;
-        localStorage.setItem("size",s);
+        var r = document.getElementById("rowS").value;
+        localStorage.setItem("numRow",r);
+        var c = document.getElementById("colS").value;
+        localStorage.setItem("numCol",c);
         dataDiv.innerHTML = "success! you will be redirected shortly";
         window.location.href = "GameGrid.html";
 
@@ -38,11 +40,29 @@ function send()
 <BODY BGCOLOR="FAFAFA">
   Username: <input type="text" id="userInput"><br>
   Password: <input type="password" id="passInput"><br>
-  Grid Size: <select id="sz">
-  <option value="2x2">2x2</option>
-  <option value="4x4">4x4</option>
-  <option value="8x8">8x8</option>
+  Grid Size: <select id="rowS" display = "inline">
+    <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4" selected = "selected">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+</select> x <select id="colS" display = "inline">
+  <option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4" selected = "selected">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
 </select>
+
+
    <button onclick="send()">go!</button>
    <div id= "message"></div>
 <H1>2048</H1>

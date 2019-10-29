@@ -7,15 +7,11 @@ function main ()
 	{
 		var lg = document.getElementById("loginMessage");
 		lg.innerHTML = localStorage.getItem("loginStamp");
-
-		switch (localStorage.getItem("size")) {
-			case "2x2": gridSize = [2,2]; break;
-			case "4x4": gridSize = [4,4]; break;
-			case "8x8": gridSize = [8,8]; break;
-
-		}
 	}
-
+ if (!(localStorage.getItem('numRow') == null))
+ {
+	 gridSize = [localStorage.getItem("numRow"),localStorage.getItem("numCol")];
+ }
 
 
 	tbl = document.getElementById('tablehere');
@@ -33,13 +29,16 @@ function main ()
 	btn.appendChild(b);
 	btn.appendChild(s);
 
-
-
 	initialize(gridSize[0],gridSize[1]);
 	makeTable(tbl,gridSize[0],gridSize[1]);
 	addRandomTile();
 	update(tbl,gridSize[0],gridSize[1]);
 
+	if (Math.abs(gridSize[0] - gridSize[1]) > 3)
+	{
+		var t = document.getElementById("texthere");
+		t.innerHTML = "that's an odd grid size... are you sure you want to play on that?";
+	}
 }
 
 document.addEventListener('keydown',    keyPress,    false);

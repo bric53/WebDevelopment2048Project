@@ -1,4 +1,4 @@
-var data; 
+var data;
 var TableSize; //height, width
 var win = 0;
 var gameOver = 0;
@@ -10,14 +10,14 @@ function getTile(row,col)
 {
 	if ((row < 0) || (row >= TableSize[0]) || (col < 0) || (col >= TableSize[1]))
 		throw "tile requested outside of range";
-	
+
 	return data[row][col];
 
 }
 
 function initialize(height,width)//sets the game grid to all 0's
 {
-	
+
 	TableSize = [height,width];
 	var ful = [];//the full table data
 	var row = [];//the data for one row
@@ -31,8 +31,8 @@ function initialize(height,width)//sets the game grid to all 0's
 		ful.push(temp);
 	}
 	data = ful;
-	
-	
+
+
 }
 function isWin()
 {
@@ -43,38 +43,38 @@ function isWin()
 function up()
 {
 	var mov = 0; //has this function changed data yet?
-	
+
 	for (i = 1;i < TableSize[0]; i++) //top to bottom
 	{
 		for (j = 0; j < TableSize[1]; j++) //from left to right
-		{			
-			 
-			
-			
+		{
+
+
+
 			if (data[i][j] == 0) // skips unnecesary movements
 			{ continue;}
-			
+
 			mov |= moveTile("up", i,j); //main purpose is to run moveTile, but it also sets mov to 1 if anything has been moved
-			
-			
+
+
 		}
 	}
 	if (!(mov ==0))
 	{
 		addRandomTile();
 	}
-	
-} 
+
+}
 function moveTile(dir, row, col)
 {
-	
+
 	if (data[row][col] == 0) //skips unnecesary computation
 	{return;}
 	switch (dir){
 	case ("up"):
 		if (row - 1 >= 0)//verifies that there is a space to move the tile to
 		{
-		
+
 			next = data[row-1][col];
 			if (next == 0) //checks to see if next tile is blank
 			{
@@ -90,13 +90,13 @@ function moveTile(dir, row, col)
 				data[row][col] = 0;
 				return 1;
 			}
-		
+
 		}
 	break;
 	case ("down")://see comments on up
 		if (row + 1 < TableSize[0])
 		{
-		
+
 			next = data[row+1][col];
 			if (next == 0)
 			{
@@ -112,13 +112,13 @@ function moveTile(dir, row, col)
 				data[row][col] = 0;
 				return 1;
 			}
-		
+
 		}
 	break;
 	case ("left")://see comments on up
 		if (col - 1 >= 0)
 		{
-		
+
 			next = data[row][col-1];
 			if (next == 0)
 			{
@@ -134,13 +134,13 @@ function moveTile(dir, row, col)
 				data[row][col] = 0;
 				return 1;
 			}
-		
+
 		}
 	break;
 	case ("right")://see comments on up
 		if (col + 1 < TableSize[1])
 		{
-		
+
 			next = data[row][col+1];
 			if (next == 0)
 			{
@@ -156,11 +156,11 @@ function moveTile(dir, row, col)
 				data[row][col] = 0;
 				return 1;
 			}
-		
+
 		}
 	break;
 	}
-	
+
 }
 function newGame()
 {
@@ -169,7 +169,7 @@ function newGame()
 	win = 0;
 	gameOver = 0;
 	score = 0;
-	
+
 }
 function getScore()
 {
@@ -177,10 +177,10 @@ function getScore()
 }
 function addRandomTile()
 {
-	
+
 	for (i = 0; i < 16; i++) //tries to find a random tile, up to 16 times
 	{
-		
+
 		var r = Math.floor(Math.random() * TableSize[0]);//random row
 		var c = Math.floor( Math.random() * TableSize[1]);//random column
 		if (data[r][c] == 0)
@@ -193,7 +193,7 @@ function addRandomTile()
 	{
 		for (j = 0; j<TableSize[1];j++)
 		{
-			//alert("no rand tile, finding algorithmically at:" + i + j);
+		
 			if (data[i][j] == 0)
 			{
 				data[i][j] = 2 * Math.floor((Math.random() * 2) + 1);
@@ -201,36 +201,36 @@ function addRandomTile()
 			}
 		}
 	}
-	
+
 }
 function right()
 {
 	 var mov = 0;
 	for (j = TableSize[1] -1; j >= 0; j--) //from right to left
 	{
-		
+
 		for (i = 0; i < TableSize[0]; i++) //from top to bottom
 		{
-			mov |= moveTile("right",i,j); 
+			mov |= moveTile("right",i,j);
 		}
 	}
 	if (!(mov == 0))//don't add a tile if the previous move didn't move anything
 	addRandomTile();
-} 
+}
 function left()
 {
 	var mov = 0;//a bool to see if anything has moved
 	 var saveData = data;
 	for (i = 0;i<TableSize[0] ;i++) //from left to right
 	{
-		
+
 		for (j = 0; j < TableSize[1]; j++) //from top to bottom
-		
+
 			mov |= moveTile("left",i,j);
 	}
 	if (!(mov == 0))
 	addRandomTile();
-} 
+}
 function down()
  {
 	 var mov = 0;
@@ -241,26 +241,26 @@ function down()
 		{
 			if (data[i][j] == 0) // skips unnecesary movements. Doesn't change result, just saves time
 			{ continue;}
-			
+
 			mov |= moveTile("down", i,j);
 		}
 	}
 	if (!(mov == 0))
 	addRandomTile();
- } 
+ }
  function checkLose() //checks to see if there is a valid move by going through each row, then each column
  {
-	 
+
 	 var t = 0;
-	 
-	 for (i = 0; i < data.length; i++) //checks every row
+
+	 for (i = 0; i < TableSize[0]; i++) //checks every row
 	 {
-		 for (j = 0; j < data.length; j++)
+		 for (j = 0; j < TableSize[1]; j++)
 		 {
 			  if (data[i][j] >= 2048)
 			 {
 				 win = 1;
-				 
+
 			 }
 			 if (t == data[i][j])// if element is the same as previous one, return false
 			 {
@@ -270,22 +270,22 @@ function down()
 			 {
 				 return false;
 			 }
-			
+
 			 t = data[i][j];
-			 
+
 		 }
 		 t = 0; //resets t to avoid it thinking "line jumps" are valid moves
 	 }
-	 for (j = 0; j < data.length; j++) //checks every column
+	 for (j = 0; j < TableSize[1]; j++) //checks every column
 	 {
-		 for (i = 0; i < data.length; i++)
+		 for (i = 0; i < TableSize[0]; i++)
 		 {
 			 if (t == data[i][j])// if element is the same as previous one, return false
 			 {
 				 return false;
 			 }
 			 t = data[i][j];
-			 
+
 		 }
 		 t = 0; //resets t to avoid it thinking "line jumps" are valid moves
 	 }
