@@ -3,11 +3,37 @@
 <HEAD>
 
 <TITLE>Index</TITLE>
+<script>
+function send()
+{
+
+      var data = "userName=" + document.getElementById("userInput").value + "&password=" + document.getElementById("passInput").value;
+
+      var localRequest = new XMLHttpRequest();
+      localRequest.open("POST", "http://universe.tc.uvu.edu/cs2550/assignments/PasswordCheck/check.php", false);
+      localRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      localRequest.send(data);
+  	var dataDiv = document.getElementById("message");
+  	var responseJson = JSON.parse(localRequest.responseText);
+    if (responseJson["result"] == "valid")
+    {
+        dataDiv.innerHTML = responseJson["userName"] + " " + responseJson["timestamp"];
+    }
+    else
+  	 {
+       dataDiv.innerHTML = "I'm sorry, that userName and password is invalid, please try again. \n forgot password? that's too bad";
+     }
+
+}
+</script>
 <link href="Stylesheet.css" rel="stylesheet" type="text/css" />
 </HEAD>
 
 <BODY BGCOLOR="FAFAFA">
-
+  Username: <input type="text" id="userInput"><br>
+  Password: <input type="password" id="passInput"><br>
+   <button onclick="send()">go!</button>
+   <div id= "message"></div>
 <H1>2048</H1>
 
 to play the game, press <a href = "GameGrid.html" target = "_blank">here!</a>
@@ -67,9 +93,3 @@ returns the score
 </BODY>
 
 </HTML>
-
- 
-
- 
-
- 
