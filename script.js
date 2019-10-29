@@ -3,38 +3,52 @@ var s;
 var gridSize = [4,4];
 function main ()
 {
-	
+	if(localStorage.getItem("valid"))
+	{
+		var lg = document.getElementById("loginMessage");
+		lg.innerHTML = localStorage.getItem("loginStamp");
+
+		switch (localStorage.getItem("size")) {
+			case "2x2": gridSize = [2,2]; break;
+			case "4x4": gridSize = [4,4]; break;
+			case "8x8": gridSize = [8,8]; break;
+
+		}
+	}
+
+
+
 	tbl = document.getElementById('tablehere');
 	btn = document.getElementById('buttonhere');
 	var removeCheck = tbl.firstChild;
     tbl.removeChild(removeCheck);
-	
+
 	var b = document.createElement("button");
 	b.innerHTML = "Restart";
 	b.addEventListener("click", function() {restart()} );
-	
+
 	s = document.createElement("P");
 	s.innerHTML = "Score: 0"
 	s.className = "score";
 	btn.appendChild(b);
 	btn.appendChild(s);
-	
-	
-	
+
+
+
 	initialize(gridSize[0],gridSize[1]);
 	makeTable(tbl,gridSize[0],gridSize[1]);
 	addRandomTile();
 	update(tbl,gridSize[0],gridSize[1]);
-	
+
 }
 
 document.addEventListener('keydown',    keyPress,    false);
-
+function ClearLStorage(){localStorage.clear();}
 function restart()
 {
 	 newGame();
 	 update(tbl,gridSize[0],gridSize[1]);
-	 
+
 	var t = document.getElementById("texthere");//resets bottom text
 	 t.innerHTML = "";
 }
@@ -51,7 +65,7 @@ function keyPress(event) {
 	return;
   }
   update(tbl,gridSize[0],gridSize[1]);
-  
+
 }
 
 
@@ -65,15 +79,15 @@ function makeTable(main, height, width)
 		 TR = document.createElement('tr');
 		for (j = 0; j < width; j++){
 			TD = document.createElement('td');
-			TD.innerHTML = getTile(i,j); 
+			TD.innerHTML = getTile(i,j);
 			if (TD.innerHTML == 0) //makes empty tiles blank
 				TD.innerHTML = "";
 			TD.className = returnClass(TD); //adds style to the cell
 			TR.appendChild(TD);	//adds the tile to the row
-			
+
 		}
 		TB.appendChild(TR); //adds a row to the table
-		
+
 	}
 	main.appendChild(TB);
 }
@@ -85,27 +99,27 @@ function update(main, height, width)
 	for (i = 0; i < height; i++){
 		if (gridSize[1] %2 == 0){idx++; }//offsets each row by one to checker
 		for (j = 0; j < width; j++){
-			TileNum = getTile(i,j); 
+			TileNum = getTile(i,j);
 			if (TileNum == 0)
 			main.children[0].children[i].children[j].innerHTML = "";
 		else
 			main.children[0].children[i].children[j].innerHTML = TileNum;
-			
+
 			main.children[0].children[i].children[j].className = returnClass(main.children[0].children[i].children[j]);
 		}
-		
-		
+
+
 	}
 	if (checkLose())
   {
-	  
-	  
+
+
 	  var w = isWin();
 	  var t = document.getElementById("texthere");
-	  
+
 	  t.innerHTML = w?("Good Game, You Won!!!"):("Sorry, you Lost! \n \n I guess you just weren't good enough! \n\n to try again, press \"restart\"");
-	  
-	  
+
+
   }
 }
 
@@ -114,7 +128,7 @@ function update(main, height, width)
 var idx = 0; //how many tiles have been assigned a style, used to make a checkered pattern
 function returnClass(el) //adds styles to cells with a given value. el is the Data element. Num is an identifier
 {
-	
+
 	idx++;
 	switch(el.innerHTML)
 	{
@@ -133,8 +147,8 @@ function returnClass(el) //adds styles to cells with a given value. el is the Da
 	}
 	if (idx % 2 == 0)
 		return "blank1";
-	else 
+	else
 		return "blank2";
-	
-	
+
+
 }
