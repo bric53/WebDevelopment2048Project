@@ -7,6 +7,19 @@ function main ()
  {
 	 gridSize = [localStorage.getItem("numRow"),localStorage.getItem("numCol")];
  }
+//try
+{
+  file.open("GET", "highScores.json", false);
+  file.send();
+  var responseJson = JSON.parse(file.responseText);
+  var jName = responseJson.gameState["data"];
+  gridSize = responseJson.gameState["size"];
+  var jScore = responseJson.gameState["score"];
+}
+//catch (e) 
+{
+  alert("it looks like your browser doesn't support me trying to load highscores from a local json file. You could try again on a browser that cares")
+}
 
 
 	tbl = document.getElementById('tablehere');
