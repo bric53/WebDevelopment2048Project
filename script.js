@@ -7,19 +7,8 @@ function main ()
  {
 	 gridSize = [localStorage.getItem("numRow"),localStorage.getItem("numCol")];
  }
-//try
-{
-  file.open("GET", "highScores.json", false);
-  file.send();
-  var responseJson = JSON.parse(file.responseText);
-  var jName = responseJson.gameState["data"];
-  gridSize = responseJson.gameState["size"];
-  var jScore = responseJson.gameState["score"];
-}
-//catch (e) 
-{
-  alert("it looks like your browser doesn't support me trying to load highscores from a local json file. You could try again on a browser that cares")
-}
+
+JsonStuff();
 
 
 	tbl = document.getElementById('tablehere');
@@ -102,7 +91,8 @@ function makeTable(main, height, width)
 function update(main, height, width)
 {
 	idx = 0;
-	s.innerHTML = "Score: " + getScore();
+  if (getScore() > localStorage.getItem("PHighScore")) {localStorage.setItem("PHighScore",getScore())}
+	s.innerHTML = "Score: " + getScore() + "   high Score: " + localStorage.getItem("PHighScore");
 	for (i = 0; i < height; i++){
 		if (gridSize[1] %2 == 0){idx++; }//offsets each row by one to checker
 		for (j = 0; j < width; j++){
@@ -157,5 +147,43 @@ function returnClass(el) //adds styles to cells with a given value. el is the Da
 	else
 		return "blank2";
 
+
+}
+
+function JsonStuff()
+{
+  try
+  {
+    var file = new XMLHttpRequest();
+    file.open("GET", "highScores.json", false);
+    file.send();
+    var responseJson = JSON.parse(file.responseText);
+    var jName = responseJson.gameState["names"];
+    var jscore = responseJson.gameState["scores"];
+    var highScore = document.getElementById('highScoreTable');
+    var tempTable = document.createElement("table");
+    for (i = 0; i<5;i++)
+    {
+
+      var tempCell = document.createElement("td");
+      var tempCell2 = document.createElement("td");
+      var tempRow = document.createElement("tr");
+      tempCell = document.createElement("td");
+      tempCell.className = "boring";
+      tempCell2.className = "boring";
+      tempRow.className = "boring";
+      tempCell.innerHTML = jName[i];
+      tempRow.appendChild(tempCell);
+      tempCell2.innerHTML = jscore[i];
+      tempRow.appendChild(tempCell2);
+      tempTable.appendChild(tempRow);
+    }
+    tempTable.className = "boring";
+    highScore.appendChild(tempTable);
+  }
+  catch (e)
+  {
+    alert("it looks like your browser doesn't support me trying to load highscores from a local json file. You could try again on a browser that cares. Your error is: " + e)
+  }
 
 }

@@ -19,14 +19,14 @@ button {
 	border-radius: 12px;
 	background-color: white;
 	display: inline-block;
-	
+
 }
 button:hover
 {
 	background-color: #AAAAAA;
 	color: white;
 	transition-duration: .4s;
-	
+
 }
 p { color:black; }
 
@@ -49,9 +49,18 @@ td{
 	background-color: #E5CFc4;
 	font-size: 40px;
 	font: baloo;
-	
+
 }
 tr {
 	width 25%;
-	
+
+}
+
+.boring {
+	background-color: white;
+	height: 10px;
+	border: 1px solid black;
+	color = black;
+	font-size: 14px;
+
 }
